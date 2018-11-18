@@ -13,7 +13,10 @@ Row.propTypes = {
   padding: PropTypes.string,
   margin: PropTypes.string,
   background: PropTypes.string,
-  borderRadius: PropTypes.string
+  borderRadius: PropTypes.string,
+  flex: PropTypes.bool,
+  alignCenter: PropTypes.bool,
+  spaceBetween: PropTypes.bool
 }
 export default styled(Row)`
   margin: ${props => props.margin ? `${props.margin}` : `0`};
@@ -22,4 +25,6 @@ export default styled(Row)`
   ${props => props.borderRadius && `border-radius: ${props.borderRadius};`}
   box-sizing: border-box;
   ${props => props.flex && `display: flex;`}
+  ${props => props.alignCenter && `align-items: center;`}
+  ${props => props.spaceBetween && `justify-content: space-between;`}
 `

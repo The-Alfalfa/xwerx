@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Container from '../Common/Container';
 import Row from '../Common/Row';
 import ClientsToolbar from '../Toolbars/ClientsToolbar';
-import AlertsToolbar from '../Tables/AlertsToolbar';
+import AlertsToolbar from '../Toolbars/AlertsToolbar';
 import AlertsTable from '../Tables/AlertsTable';
 
 class App extends Component {
