@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
 import Cake from '@material-ui/icons/Cake';
+import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import ImportanceChart from './ImportanceChart';
 
 const BorderedCake = styled(Cake)`
@@ -18,6 +19,26 @@ const Table = styled.table`
 
   tr {
     border-top: 1px solid #ffffff;
+
+    &.sort {
+      border-top: 0;
+      
+      p {
+        display: inline-block;
+        cursor: pointer;
+        position: relative;
+      }
+
+      svg {
+        transform: rotate3d(0,0,1,0deg);
+        transition: transform 0.2s ease;
+        font-size: 23px;
+      }
+
+      &.asc svg {
+        transform: rotate3d(0,0,1,180deg);
+      }
+    }
   }
   td {
     padding: 0 20px;
@@ -44,8 +65,10 @@ class AlertsTable extends Component {
   constructor(props){
     super(props);
     this.state = {
-      data: []
+      data: [],
+      order: null
     };
+    this.handleSort = this.handleSort.bind(this);
   }
 
   componentDidMount() {
@@ -59,7 +82,20 @@ class AlertsTable extends Component {
     .catch(error => {
       console.log(error.message);
     });
-    
+   }
+
+   handleSort() {
+    let order = this.state.order === 'desc' ? 'asc' : this.state.order === 'asc' ? 'desc' : 'asc';
+    let sortedData = this.state.data.sort((a,b) => a['importance'].localeCompare(b['importance']));
+
+    if(order === 'desc') {
+      sortedData.reverse();
+    }
+
+    this.setState({
+      data: sortedData,
+      order: order
+    })
    }
 
    render() {
@@ -80,6 +116,9 @@ class AlertsTable extends Component {
     return (
       <Table>
         <tbody>
+          <tr className={'sort ' + this.state.order}>
+            <td colSpan="6"><p onClick={this.handleSort}>IMPORTANCE<ArrowDropDown /></p></td>
+          </tr>
           {alerts}
         </tbody>
       </Table>
