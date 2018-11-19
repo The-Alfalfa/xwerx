@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from 'react';
 import styled from "styled-components";
 import { Settings, PieChart, Refresh, ArrowDropDown } from '@material-ui/icons';
 
@@ -53,20 +53,49 @@ const Button = styled.p`
   }
 `
 
-const AlertsToolbar = () => (
-  <Toolbar>
-    <div className="left">
-      <p><strong>ALERTS</strong></p>
-      <p>Latest alerts (41)</p>
-      
-    </div>
-    <div className="right">
-      <PieChart />
-      <Refresh className="rotate" />
-      <Settings />
-      <Button><strong>SAVE</strong> <ArrowDropDown /></Button>
-    </div>
-  </Toolbar>
-)
+ class AlertsToolbar extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      data: []
+    };
+    // this.handleSort = this.handleSort.bind(this);
+  }
+
+  componentDidMount() {
+    fetch("./data/alerts.json")
+    .then(response => response.json())
+    .then(json => {
+      this.setState({
+        data: json
+      });
+    })
+    .catch(error => {
+      console.log(error.message);
+    });
+   }
+
+  render() {
+    /* const n_alerts = this.state.data;
+    const count = n_alerts.length; */
+    var count = this.state.data;
+
+    return (
+      <Toolbar>
+        <div className="left">
+          <p><strong>ALERTS</strong></p>
+          <p>Latest alerts ({count.length})</p>
+          
+        </div>
+        <div className="right">
+          <PieChart />
+          <Refresh className="rotate" />
+          <Settings />
+          <Button><strong>SAVE</strong> <ArrowDropDown /></Button>
+        </div>
+      </Toolbar>
+    )
+  }
+}
 
 export default AlertsToolbar

@@ -18,7 +18,7 @@ const Table = styled.table`
   margin-left: -20px;
 
   tr {
-    border-top: 1px solid #ffffff;
+    border-top: 1px solid #f3f3f3;
 
     &.sort {
       border-top: 0;
@@ -27,6 +27,7 @@ const Table = styled.table`
         display: inline-block;
         cursor: pointer;
         position: relative;
+        margin: 0 0 5px;
       }
 
       svg {
@@ -40,8 +41,9 @@ const Table = styled.table`
       }
     }
   }
+
   td {
-    padding: 0 20px;
+    padding: 5px 20px;
     text-align: left;
 
     div,
@@ -58,6 +60,39 @@ const Table = styled.table`
       text-transform: uppercase;
       text-align: right;
     }
+
+    &.left {
+      padding: 20px;
+    }
+  }
+`
+
+const TableFooter = styled.div`
+  border-top: 1px solid #f3f3f3;
+  position: relative;
+  padding: 20px 0;
+
+  p {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate3d(-50%,0,0);
+    margin: 0 auto;
+    text-align: center;
+    background: #7bc6a7;
+    padding: 5px 0 5px 10px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    cursor: pointer;
+  }
+
+  a {
+    display: inline-block;
+    color: #ffffff;
+    text-decoration: none;
   }
 `
 
@@ -66,9 +101,11 @@ class AlertsTable extends Component {
     super(props);
     this.state = {
       data: [],
-      order: null
+      order: null,
+      itemsShown: 5
     };
     this.handleSort = this.handleSort.bind(this);
+    this.handleMoreResults = this.handleMoreResults.bind(this);
   }
 
   componentDidMount() {
@@ -98,11 +135,18 @@ class AlertsTable extends Component {
     })
    }
 
+   handleMoreResults() {
+     let results = this.state.itemsShown + 5;
+     this.setState({
+      itemsShown: results
+     })
+   }
+
    render() {
     const alertsList = this.state.data;
     let alerts = '';
 
-    alerts = alertsList.map( (obj, index) => {
+    alerts = alertsList.slice(0, this.state.itemsShown).map( (obj, index) => {
       return (
         <tr key={index}>
           <td colSpan="2"><BorderedCake /><strong>{obj.name}</strong></td>
@@ -114,14 +158,20 @@ class AlertsTable extends Component {
     })
 
     return (
-      <Table>
-        <tbody>
-          <tr className={'sort ' + this.state.order}>
-            <td colSpan="6"><p onClick={this.handleSort}>IMPORTANCE<ArrowDropDown /></p></td>
-          </tr>
-          {alerts}
-        </tbody>
-      </Table>
+      <div>
+        <Table>
+          <tbody>
+            <tr className={'sort ' + this.state.order}>
+              <td colSpan="6"><p onClick={this.handleSort}>IMPORTANCE<ArrowDropDown /></p></td>
+            </tr>
+            {alerts}
+          </tbody>
+        </Table>
+        <TableFooter>
+          <p onClick={this.handleMoreResults}>SEE MORE<ArrowDropDown /></p>
+          <a href="#">VIEW ALL</a>
+        </TableFooter>
+      </div>
     )
   }
 }
