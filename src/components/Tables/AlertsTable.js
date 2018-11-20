@@ -113,13 +113,14 @@ const TableFooter = styled.div`
   }
 `
 
+// Component that shows all the alerts information in a table format
 class AlertsTable extends Component {
   constructor(props){
     super(props);
     this.state = {
-      data: [],
-      order: null,
-      itemsShown: 5
+      data: [], // Fetched data
+      order: null,  // Order of the table
+      itemsShown: 5 // Amount of items shown
     };
     this.handleSort = this.handleSort.bind(this);
     this.handleMoreResults = this.handleMoreResults.bind(this);
@@ -127,6 +128,7 @@ class AlertsTable extends Component {
   }
 
   componentDidMount() {
+    // Get all the data from alerts JSON file and save it as a state of the component
     fetch("./data/alerts.json")
     .then(response => response.json())
     .then(json => {
@@ -139,6 +141,7 @@ class AlertsTable extends Component {
     });
    }
 
+   // Change the order direction of the table
    handleSort() {
     let order = this.state.order === 'desc' ? 'asc' : this.state.order === 'asc' ? 'desc' : 'asc';
     let sortedData = this.state.data.sort((a,b) => a['importance'].localeCompare(b['importance']));
@@ -153,6 +156,7 @@ class AlertsTable extends Component {
     })
    }
 
+   // Show more items in the results table, incrementing them in 5 items
    handleMoreResults() {
      let results = this.state.itemsShown + 5;
      this.setState({
@@ -160,17 +164,18 @@ class AlertsTable extends Component {
      });
 
      let count = (this.state.data).length;
-     console.log(this.state.itemsShown);
-     console.log(count);
-     if(this.state.itemsShown >= count) {
+     if(this.state.itemsShown >= count) { // If there's no more items to show, hide the button
       document.getElementsByClassName("tableFooter")[0].style.display = 'none';
      }
    }
+
+   // Show all the items in the results table
    handleViewAll() {
     this.setState({
      itemsShown: null
     });
-      document.getElementsByClassName("tableFooter")[0].style.display = 'none';
+
+    document.getElementsByClassName("tableFooter")[0].style.display = 'none'; // Hide the button
   }
 
    render() {
@@ -178,9 +183,10 @@ class AlertsTable extends Component {
     let alerts = '';
 
     if(this.state.itemsShown != null) {
-      alertsList = alertsList.slice(0, this.state.itemsShown);
+      alertsList = alertsList.slice(0, this.state.itemsShown); // Show the amount of items given by the state of the component
     }
 
+    // Create a table row for each alert
     alerts = alertsList.map( (obj, index) => {
       return (
         <tr key={index}>

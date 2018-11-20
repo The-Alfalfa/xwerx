@@ -37,7 +37,7 @@ const Toolbar = styled.div`
     color: #747f86;
   }
 `
-
+// Component that shows the clients toolbar
 const ClientsToolbar = () => (
   <Toolbar>
     <div className="left">

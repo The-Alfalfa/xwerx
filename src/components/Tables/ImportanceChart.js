@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
+// Component that shows the importance of each alert changing the opacity of the vars depending on it
 const ImportanceChart = (props) => (
   <div className={props.className}>
     <span></span>

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
+// Component that creates a div with several optional CSS
 const Row = (props) => (
   <div className={props.className}>
     {props.children}

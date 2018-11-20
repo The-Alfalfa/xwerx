@@ -12,6 +12,7 @@ const IncreaseText = styled.div`
   }
 `
 
+// Component that shows the increase chart with the information given by the parent ClientSummary
 const IncreaseChart = (props) => (
   <div className={props.className}>
     <ArrowUpward />

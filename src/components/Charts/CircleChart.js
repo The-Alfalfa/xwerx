@@ -20,7 +20,7 @@ const CircleText = styled.div`
     line-height: 34px;
   }
 `
-
+// Component that shows the circle chart with the information given by the parent ClientSummary
 const CircleChart = (props) => (
   <div className={props.className}>
     <div className="circle-container">

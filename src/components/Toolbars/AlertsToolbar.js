@@ -53,6 +53,7 @@ const Button = styled.p`
   }
 `
 
+// Component that shows a toolbar for the Alerts section
  class AlertsToolbar extends Component {
   constructor(props){
     super(props);
@@ -62,6 +63,7 @@ const Button = styled.p`
   }
 
   componentDidMount() {
+    // Get alerts from JSON file for the counter and save it as state of this component
     fetch("./data/alerts.json")
     .then(response => response.json())
     .then(json => {

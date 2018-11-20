@@ -42,7 +42,7 @@ const BarChartContainer = styled.div`
     width: 100%:
   }
 `
-
+// Component that shows the bars chart with the information given by the parent ClientSummary
 class BarChart extends Component {
   render() {
     let data = this.props.chartData;

@@ -5,6 +5,7 @@ import CircleChart from './CircleChart';
 import BarChart from './BarChart';
 import IncreaseChart from './IncreaseChart';
 
+// Component that shows the different charts
 class ClientsSummary extends Component {
   constructor(props){
     super(props);
@@ -13,6 +14,7 @@ class ClientsSummary extends Component {
     };
   }
 
+  // Get the activity data by month
   componentDidMount() {
     fetch("./data/activity.json")
     .then(response => response.json())
