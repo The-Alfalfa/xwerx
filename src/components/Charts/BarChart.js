@@ -4,21 +4,21 @@ import PropTypes from "prop-types";
 
 const Bar = styled.div`
   height: 100%;
-  width: 10px;
+  width: 8px;
   background: #596169;
-  border-radius: 25px;
   position: relative;
 
   &:before {
     content: '';
     position: absolute;
     width: 100%;
-    border-radius: 25px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
     left: 0;
     bottom: 0;
     background: #67a3e7;
 
-    animation: ${props => moveChart((props.value * 100) / 150)} 1s ease-out forwards;
+    animation: ${props => moveChart((props.value * 100) / 280)} 1s ease-out forwards;
     animation-delay: 1s;
   }
 `
@@ -35,7 +35,7 @@ const moveChart = (y) => keyframes`
 const BarChartContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 100%;
+  height: 100px;
   text-align: center;
 
   > p {
@@ -48,7 +48,7 @@ class BarChart extends Component {
     let data = this.props.chartData;
     
     return(
-      <div>
+      <div className={this.props.className}>
         <BarChartContainer>
           <Bar value={data.Jan} />
           <Bar value={data.Feb} />
@@ -73,7 +73,16 @@ BarChart.propTypes = {
   chartData: PropTypes.any.isRequired
 }
 export default styled(BarChart)`
-  padding: 0 20px;
   box-sizing: border-box;
-  width: 33.334%;
+  width: 20%;
+
+  p {
+    margin: 20px auto 0;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 100%;
+    max-width: 200px;
+  }
 `

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
-import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import Row from '../Common/Row';
 import CircleChart from './CircleChart';
 import BarChart from './BarChart';
-/*import IncreaseChart from './IncreaseChart'; */
+import IncreaseChart from './IncreaseChart';
 
 class ClientsSummary extends Component {
   constructor(props){
@@ -30,12 +29,22 @@ class ClientsSummary extends Component {
    render() {
     const increase = this.state.data.Dec - this.state.data.Jan;
     return (
-      <Row flex spaceBetween>
+      <Row className={this.props.className} flex spaceBetween alignBottom>
         <CircleChart value={this.state.data.Dec} />
         <BarChart chartData={this.state.data} />
+        <IncreaseChart increaseValue={increase} />
       </Row>
     )
   }
 }
 
-export default ClientsSummary
+export default styled(ClientsSummary)`
+  @media screen and (max-width: 900px){
+    align-items: center;
+    flex-direction: column;
+
+    > div {
+      margin-bottom: 40px;
+    }
+  }
+`

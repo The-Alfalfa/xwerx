@@ -28,6 +28,8 @@ const Table = styled.table`
         cursor: pointer;
         position: relative;
         margin: 0 0 5px;
+        font-size: 0.9rem;
+        font-weight: bold;
       }
 
       svg {
@@ -65,6 +67,14 @@ const Table = styled.table`
       padding: 20px;
     }
   }
+
+  @media screen and (max-width: 900px) {
+    td {
+      padding: 5px;
+      font-size: 0.93rem;
+      display: block;
+    }
+  }
 `
 
 const TableFooter = styled.div`
@@ -94,6 +104,12 @@ const TableFooter = styled.div`
   p {
     cursor: pointer;
     display: inline-block;
+    font-size: 0.9rem;
+    margin: 0;
+    
+    &#viewAll {
+      font-weight: bold;
+    }
   }
 `
 

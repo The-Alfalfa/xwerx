@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 
 const CircleText = styled.div`
   position: absolute;
@@ -10,7 +9,7 @@ const CircleText = styled.div`
   z-index: 2;
 
   p {
-    margin: 0;
+    margin: 20px auto 0;
   }
 
   p.value {
@@ -18,12 +17,15 @@ const CircleText = styled.div`
     color: #67a3e7;
     margin: 0 auto;
     text-align: center;
+    line-height: 34px;
   }
 `
 
 const CircleChart = (props) => (
   <div className={props.className}>
-    <div className="arc">
+    <div className="circle-container">
+      <div className="arc">
+      </div>
     </div>
     <CircleText>
         <p className="value">{props.value}</p>
@@ -32,18 +34,35 @@ const CircleChart = (props) => (
   </div>
 )
 
-CircleChart.propTypes = {
-  value: PropTypes.number.isRequired
-}
 export default styled(CircleChart)`
   position: relative;
-  max-width: 33.334%;
-  width: 300px;
-  height: 150px;
-  overflow: hidden;
+  padding-bottom: 42px;
+
+  .circle-container {
+    position: relative;
+    width: 300px;
+    height: 150px;
+    overflow: hidden;
+
+    &:before{
+      content: '';
+      width: 300px;
+      height: 150px;
+      position: absolute;
+      -ms-transform-origin: 50% 0%;
+      -webkit-transform-origin: 50% 0%;
+      transform-origin: 50% 0%;
+      left: 0;
+      box-sizing: border-box;
+      border: 50px solid #596169;
+      border-bottom: none;
+      top: 0;
+      z-index: 1;
+      border-radius: 300px 300px 0 0;
+    }
+  }
   
-  .arc,
-  &:before{
+  .arc {
     content: '';
     width: 300px;
     height: 150px;
@@ -55,13 +74,7 @@ export default styled(CircleChart)`
     box-sizing: border-box;
   }
   
-  &:before{
-    border: 50px solid #596169;
-    border-bottom: none;
-    top: 0;
-    z-index: 1;
-    border-radius: 300px 300px 0 0;
-  }
+  
   
   .arc {
     border: 50px solid #67a3e7;

@@ -30,4 +30,5 @@ export default styled(Row)`
   ${props => props.alignCenter && `align-items: center;`}
   ${props => props.spaceBetween && `justify-content: space-between;`}
   ${props => props.wrap && `flex-wrap: wrap;`}
+  ${props => props.alignBottom && `align-items: flex-end;`}
 `
