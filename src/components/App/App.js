@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <div>
         <Container>
-          <Row padding="20px 40px 60px" margin="0 0 40px" background="#4b545d" borderRadius="6px">
+          <Row padding="20px 40px 60px" margin="0 0 40px" background="#4b545d" borderRadius="6px" flex spaceBetween wrap>
             <ClientsToolbar />
             <ClientsSummary />
           </Row>

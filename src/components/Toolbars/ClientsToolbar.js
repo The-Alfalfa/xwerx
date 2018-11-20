@@ -7,6 +7,7 @@ const Toolbar = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
+  width: 100%;
 
   p {
     strong {

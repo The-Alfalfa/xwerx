@@ -70,9 +70,11 @@ const Table = styled.table`
 const TableFooter = styled.div`
   border-top: 1px solid #f3f3f3;
   position: relative;
-  padding: 20px 0;
+  padding: 20px;
+  margin-left: -20px;
+  width: 100%;
 
-  p {
+  #viewMore {
     position: absolute;
     top: 0;
     left: 50%;
@@ -89,10 +91,9 @@ const TableFooter = styled.div`
     cursor: pointer;
   }
 
-  a {
+  p {
+    cursor: pointer;
     display: inline-block;
-    color: #ffffff;
-    text-decoration: none;
   }
 `
 
@@ -106,6 +107,7 @@ class AlertsTable extends Component {
     };
     this.handleSort = this.handleSort.bind(this);
     this.handleMoreResults = this.handleMoreResults.bind(this);
+    this.handleViewAll = this.handleViewAll.bind(this);
   }
 
   componentDidMount() {
@@ -139,14 +141,31 @@ class AlertsTable extends Component {
      let results = this.state.itemsShown + 5;
      this.setState({
       itemsShown: results
-     })
+     });
+
+     let count = (this.state.data).length;
+     console.log(this.state.itemsShown);
+     console.log(count);
+     if(this.state.itemsShown >= count) {
+      document.getElementsByClassName("tableFooter")[0].style.display = 'none';
+     }
    }
+   handleViewAll() {
+    this.setState({
+     itemsShown: null
+    });
+      document.getElementsByClassName("tableFooter")[0].style.display = 'none';
+  }
 
    render() {
-    const alertsList = this.state.data;
+    let alertsList = this.state.data;
     let alerts = '';
 
-    alerts = alertsList.slice(0, this.state.itemsShown).map( (obj, index) => {
+    if(this.state.itemsShown != null) {
+      alertsList = alertsList.slice(0, this.state.itemsShown);
+    }
+
+    alerts = alertsList.map( (obj, index) => {
       return (
         <tr key={index}>
           <td colSpan="2"><BorderedCake /><strong>{obj.name}</strong></td>
@@ -167,9 +186,9 @@ class AlertsTable extends Component {
             {alerts}
           </tbody>
         </Table>
-        <TableFooter>
-          <p onClick={this.handleMoreResults}>SEE MORE<ArrowDropDown /></p>
-          <a href="#">VIEW ALL</a>
+        <TableFooter className="tableFooter">
+          <p id="viewMore" onClick={this.handleMoreResults}>SEE MORE<ArrowDropDown /></p>
+          <p id="viewAll" onClick={this.handleViewAll}>VIEW ALL</p>
         </TableFooter>
       </div>
     )

@@ -16,9 +16,11 @@ Row.propTypes = {
   borderRadius: PropTypes.string,
   flex: PropTypes.bool,
   alignCenter: PropTypes.bool,
-  spaceBetween: PropTypes.bool
+  spaceBetween: PropTypes.bool,
+  wrap: PropTypes.bool
 }
 export default styled(Row)`
+  width: 100%;
   margin: ${props => props.margin ? `${props.margin}` : `0`};
   padding: ${props => props.padding ? `${props.padding}` : `0`};
   ${props => props.background && `background: ${props.background};`}
@@ -27,4 +29,5 @@ export default styled(Row)`
   ${props => props.flex && `display: flex;`}
   ${props => props.alignCenter && `align-items: center;`}
   ${props => props.spaceBetween && `justify-content: space-between;`}
+  ${props => props.wrap && `flex-wrap: wrap;`}
 `

@@ -36,8 +36,8 @@ CircleChart.propTypes = {
   value: PropTypes.number.isRequired
 }
 export default styled(CircleChart)`
-
   position: relative;
+  max-width: 33.334%;
   width: 300px;
   height: 150px;
   overflow: hidden;

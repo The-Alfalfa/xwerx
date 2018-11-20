@@ -59,7 +59,6 @@ const Button = styled.p`
     this.state = {
       data: []
     };
-    // this.handleSort = this.handleSort.bind(this);
   }
 
   componentDidMount() {
@@ -76,8 +75,6 @@ const Button = styled.p`
    }
 
   render() {
-    /* const n_alerts = this.state.data;
-    const count = n_alerts.length; */
     var count = this.state.data;
 
     return (
