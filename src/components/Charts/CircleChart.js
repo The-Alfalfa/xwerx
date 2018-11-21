@@ -82,10 +82,16 @@ export default styled(CircleChart)`
     border-radius: 0 0 300px 300px;
     top: 100%;
     z-index: 2;
+    -webkit-animation: circle 1s ease-out forwards;
     animation: circle 1s ease-out forwards;
     animation-delay: 1s;
+    -webkit-animation-delay: 1s;
     
     @keyframes circle {
+      from { transform: rotate3d(0,0,1,0deg); }
+      to { transform: rotate3d(0,0,1,${props => props.value * 0.68}deg); }
+    }
+    @-webkit-keyframes circle {
       from { transform: rotate3d(0,0,1,0deg); }
       to { transform: rotate3d(0,0,1,${props => props.value * 0.68}deg); }
     }
