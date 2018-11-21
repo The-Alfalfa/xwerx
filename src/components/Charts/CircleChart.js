@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled , { keyframes } from "styled-components";
 
 const CircleText = styled.div`
   position: absolute;
@@ -20,6 +20,11 @@ const CircleText = styled.div`
     line-height: 34px;
   }
 `
+const moveCircle = (y) => keyframes`
+  from { transform: rotate3d(0,0,1,0deg); }
+  to { transform: rotate3d(0,0,1,${y}deg); }
+`;
+
 // Component that shows the circle chart with the information given by the parent ClientSummary
 const CircleChart = (props) => (
   <div className={props.className}>
@@ -49,8 +54,6 @@ export default styled(CircleChart)`
       width: 300px;
       height: 150px;
       position: absolute;
-      -ms-transform-origin: 50% 0%;
-      -webkit-transform-origin: 50% 0%;
       transform-origin: 50% 0%;
       left: 0;
       box-sizing: border-box;
@@ -67,8 +70,6 @@ export default styled(CircleChart)`
     width: 300px;
     height: 150px;
     position: absolute;
-    -ms-transform-origin: 50% 0%;
-    -webkit-transform-origin: 50% 0%;
     transform-origin: 50% 0%;
     left: 0;
     box-sizing: border-box;
@@ -82,18 +83,11 @@ export default styled(CircleChart)`
     border-radius: 0 0 300px 300px;
     top: 100%;
     z-index: 2;
-    -webkit-animation: circle 1s ease-out forwards;
-    animation: circle 1s ease-out forwards;
+    animation-name: ${props => moveCircle(props.value * 0.68)};
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
     animation-delay: 1s;
-    -webkit-animation-delay: 1s;
-    
-    @keyframes circle {
-      from { transform: rotate3d(0,0,1,0deg); }
-      to { transform: rotate3d(0,0,1,${props => props.value * 0.68}deg); }
-    }
-    @-webkit-keyframes circle {
-      from { transform: rotate3d(0,0,1,0deg); }
-      to { transform: rotate3d(0,0,1,${props => props.value * 0.68}deg); }
-    }
   }
 `
